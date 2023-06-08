@@ -2,6 +2,7 @@ from django.db import models
 from datetime import datetime
 
 # Create your models here.
+
 class Address(models.Model):
     name = models.CharField(max_length=100)
     email = models.CharField(max_length=50)
@@ -29,6 +30,16 @@ class Department(models.Model):
 
     def __str__(self):
         return self.deptName
+class Attendance(models.Model):
+    # Subject Attendance
+    id = models.AutoField(primary_key=True)
+    subject_id = models.ForeignKey(Department, on_delete=models.DO_NOTHING)
+    attendance_date = models.DateField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    objects = models.Manager()
+    def __str__(self):
+        return self.subject_id
 class Staff(models.Model):
     employeeID = models.CharField(max_length=100)
     full_name = models.CharField(max_length=100)

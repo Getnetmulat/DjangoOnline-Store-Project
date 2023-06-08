@@ -5,8 +5,9 @@
 </head>
 <body>
 <h1>User Profile</h1>
-<p>Username: JohnDoe</p>
-<p>Email: johndoe@example.com</p>
-<!-- Add more profile information here -->
+<p>Name: {{ user.first_name }} {{ user.last_name }}</p>
+<p>Email: {{ user.email }}</p>
+<p>Phone Number: {{ user.phone_number }}</p>
+<!-- Add more fields as per your model structure -->
 </body>
 </html>

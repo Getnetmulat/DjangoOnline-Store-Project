@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Checkout {% endblock %}
+{% block css %}
+{% endblock %}
+{% block body %}
+<section>
+    <div class="row container">
+        <div class="col-sm-7 pr-5">
+            {% if detail.image_url %}
+                <img src='{{ detail.image_url }}' alt="{{ detail.title }}" style="width:100%">
+            {% else %}
+                <img src="https://demofree.sirv.com/nope-not-here.jpg">
+            {% endif %}  
+       
+        </div>
+        <div class="col-sm-5">
+            <div style="width: 30rem;">
+                <div>
+                    <h5>{{ detail.title }}</h5>
+                    <hr>
+                    <p>{{ detail.description }}</p>
+                    <hr>
+                    <p>{{ detail.current_bid }}</p>
+                    <hr>
+                    <p>{{ detail.new_bid }}</p>
+                    <hr>
+                    <button class="btn btn-primary btn-block" >Place bid</button>
+                    <button class="btn-block btn-outline-primary">Add to watchlist</button>
+                </div>
+              </div>
+        </div>
+
+        <form action="{% url 'auctions:listing_detail' listing.id %}" method="post">
+            {% csrf_token %}
+            {{form.as_p}}
+            <input type="submit" value="Submit">
+        </form>
+        {% endblock %}
+        {% block js %}
+        <script>
+            {% if alert %}
+            alert("Thankyou for placing an order. Your Order ID is {{id}}. You can use it to track your order.")
+            cart = {}
+            document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=;path=/"
+            window.location.href = '/'
+            {% endif %}
+        </script>
+        {% endblock %}

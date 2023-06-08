@@ -21,6 +21,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # 'admin_adminlte.apps.AdminAdminlteConfig',
+    # 'django.contrib.admin',
     'adminlte3',
     'adminlte3_theme',
     'django.contrib.admin',
@@ -31,6 +33,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'company',
     'shop',
+    'bidder',
+    'Account',
     'django.contrib.humanize',
 ]
 
