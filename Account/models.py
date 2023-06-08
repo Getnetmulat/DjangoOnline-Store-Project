@@ -1,5 +1,6 @@
 from django.db import models
 from . models import *
+from django.contrib.auth.models import AbstractUser
 # Create your models here.
 class User(models.Model):
     # Fields specific to the online store user
@@ -43,3 +44,22 @@ class Member(models.Model):
 
     def __str__(self):
         return self.firstname + " " + self.lastname
+
+
+gender= [
+    ('M', 'Male'),
+    ('F', 'Female'),
+    ]
+class CustomUser(models.Model):
+    # Add any custom fields you need for the user model
+    first_name =models.CharField(max_length=255)
+    middle_name =models.CharField(max_length=255)
+    last_name =models.CharField(max_length=255)
+    email= models.EmailField(max_length=50, unique=True)
+    age= models.IntegerField()
+    gender = models.CharField(choices=gender, max_length=128)    
+    phone_number = models.CharField(max_length=15)
+    address = models.CharField(max_length=255)
+    
+    def __str__(self):
+        return self.first_name

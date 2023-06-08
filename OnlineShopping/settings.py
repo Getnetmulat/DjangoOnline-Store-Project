@@ -1,6 +1,7 @@
 from pathlib import Path
 import os 
 from django.conf.urls.static import static
+# AUTH_USER_MODEL = 'accounts.CustomUser'
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,7 +22,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    # 'admin_adminlte.apps.AdminAdminlteConfig',
+    # 'admin_adminlte.apps.AdminAdminlteConfig',  # <-- NEW
     # 'django.contrib.admin',
     'adminlte3',
     'adminlte3_theme',
@@ -35,7 +36,9 @@ INSTALLED_APPS = [
     'shop',
     'bidder',
     'Account',
+    'apis',
     'django.contrib.humanize',
+    # 'accounts',
 ]
 
 MIDDLEWARE = [
@@ -134,3 +137,5 @@ NEOMODEL_SIGNALS = True
 NEOMODEL_FORCE_TIMEZONE = False
 NEOMODEL_ENCRYPTED_CONNECTION = True
 NEOMODEL_MAX_POOL_SIZE = 50
+
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

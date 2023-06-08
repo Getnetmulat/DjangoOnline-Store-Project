@@ -16,8 +16,6 @@ class Company(models.Model):
 
     def __str__(self):
         return self.company_name
-
-
 class Placement(models.Model):
     """
     A placement allows investors to bid on company capital raise
@@ -26,8 +24,6 @@ class Placement(models.Model):
     placement_title = models.CharField(max_length=255)
     placement_slug = models.SlugField()
     placement_company = models.ForeignKey(Company, on_delete=models.CASCADE)
-
-
     placement_created = models.DateTimeField(auto_now_add=True)
     placement_modified = models.DateTimeField(auto_now=True)
 

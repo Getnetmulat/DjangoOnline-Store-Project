@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect, HttpResponseRedirect, get_object_or_404, redirect
 from Account.models import User, Address
 from .models import *
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.forms import UserCreationForm
 # Create your views here.
 def contact(request):
     if request.method=="POST":       
@@ -92,3 +94,29 @@ def home(request):
             context = {'msg': 'Invalid username or password'}
             return render(request, 'web/login.html', context)
 
+# Create your views here.
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('index') # Replace 'index' with the URL name of your homepage
+        else:
+            error_message = 'Invalid username or password' # Display an error message if authentication fails
+            return render(request, 'login.html', {'error_message':
+            error_message})
+    else:
+        return render(request, 'login.html')
+
+def register_view(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('index') # Replace 'index' with the URL name of your homepage
+    else:
+        form = UserCreationForm()
+    return render(request, 'registration.html', {'form': form})

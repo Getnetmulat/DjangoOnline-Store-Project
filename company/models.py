@@ -39,7 +39,7 @@ class Attendance(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     objects = models.Manager()
     def __str__(self):
-        return self.subject_id
+        return self.attendance_date
 class Staff(models.Model):
     employeeID = models.CharField(max_length=100)
     full_name = models.CharField(max_length=100)
