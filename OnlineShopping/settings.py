@@ -39,6 +39,9 @@ INSTALLED_APPS = [
     'apis',
     'django.contrib.humanize',
     # 'accounts',
+    'django_otp',
+    'django_otp.plugins.otp_totp',
+    'django_otp.plugins.otp_static',
 ]
 
 MIDDLEWARE = [
@@ -49,6 +52,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 2FA
+    'django_otp.middleware.OTPMiddleware',
+    
 ]
 
 ROOT_URLCONF = 'OnlineShopping.urls'
