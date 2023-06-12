@@ -9,6 +9,8 @@ from . inherit import cartData
 import matplotlib.pyplot as plt
 import io
 import urllib, base64
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 
 def index(request):
     data = cartData(request)
@@ -273,3 +275,11 @@ def chart_view(request):
     chart = f'<img src="data:image/png;base64,{image_base64}">'
 
     return render(request, 'chart.html', {'chart': chart})
+
+# API views.py
+@api_view(['GET'])
+def hello_world(request):
+    data = {
+        'message': 'Hello, World!'
+    }
+    return Response(data)
