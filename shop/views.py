@@ -6,6 +6,9 @@ import json
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from . inherit import cartData
+import matplotlib.pyplot as plt
+import io
+import urllib, base64
 
 def index(request):
     data = cartData(request)
@@ -243,3 +246,30 @@ def Logout(request):
     logout(request)
     alert = True
     return render(request, "index.html", {'alert':alert})
+
+# Data visuilization
+def chart_view(request):
+    # Data for the chart
+    x = ['Category A', 'Category B', 'Category C', 'Category D']
+    y = [15, 10, 5, 20]
+
+    # Create the bar chart
+    plt.bar(x, y)
+
+    # Set labels and title
+    plt.xlabel('Categories')
+    plt.ylabel('Values')
+    plt.title('Bar Chart')
+
+    # Save the chart image to a buffer
+    buffer = io.BytesIO()
+    plt.savefig(buffer, format='png')
+    buffer.seek(0)
+
+    # Encode the buffer image as a base64 string
+    image_base64 = base64.b64encode(buffer.getvalue()).decode('utf-8')
+
+    # Generate the HTML to display the chart image
+    chart = f'<img src="data:image/png;base64,{image_base64}">'
+
+    return render(request, 'chart.html', {'chart': chart})
